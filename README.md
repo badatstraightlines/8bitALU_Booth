@@ -1,84 +1,85 @@
 8-Bit ALU with Booth's Multiplier (RTL to GDSII)
 
-An 8-bit Arithmetic Logic Unit (ALU) integrated with a Booth's Multiplication Algorithm module, implemented in SystemVerilog and taken through full physical design synthesis, placement, and routing using the OpenLane ASIC flow.
-
-🎨 Physical Layout View
-
-Below is the layout generated after completing the full Place and Route (P&R) pipeline, verified with DRC and LVS checks in KLayout / Magic:
-
-Note: The layout above displays standard cell placement rows, power distribution networks (PDN), and global/detailed routing pins.
+An 8-bit Arithmetic Logic Unit (ALU) integrated with a Booth's Multiplication Algorithm module, implemented in SystemVerilog and implemented through a complete ASIC physical design flow (Synthesis, Floorplanning, Placement, Clock Tree Synthesis, and Routing) using OpenLane.
 
 🚀 Key Features
 
-SystemVerilog RTL: Designed using modular SystemVerilog constructs.
+SystemVerilog RTL Design: Clean, synthesizable modular design using SystemVerilog.
 
-Booth's Multiplier: Implements signed 8-bit multiplication using Booth's algorithm to reduce partial products and enhance execution efficiency.
+Booth's Multiplier Module: Implements signed 8-bit multiplication using Booth's algorithm to reduce partial products and increase computation efficiency.
 
-ALU Operations:
+Comprehensive ALU Operations:
 
-Arithmetic: Addition, Subtraction, Multiplication (Booth's).
+Arithmetic: Addition, Subtraction, Signed Multiplication (Booth's).
 
-Logical: AND, OR, XOR, NOT.
+Logic: Bitwise AND, OR, XOR, NOT, NAND, NOR.
 
-Shifts/Rotates: Logical and Arithmetic shifts.
+Shifts: Logical Shift Left/Right, Arithmetic Shift Right.
 
-ASIC Implementation: Taken through complete RTL-to-GDSII flow using OpenLane.
+Complete ASIC Physical Design: Taken through OpenLane automated P&R flow targeting SkyWater 130nm technology.
 
-📊 Physical Design Summary
+📊 Physical Design & Implementation Summary
 
 Metric
 
-Details
+Details / Specifications
 
-PDK Process
+Technology Node
 
 SkyWater 130nm (sky130hd)
 
-EDA Toolchain
+Toolchain
 
-OpenLane (OpenROAD / Yosys / KLayout / Magic)
+OpenLane (Yosys, OpenROAD, KLayout, Magic)
 
-Physical Design Outputs
+Design Phase
 
-.def (Layout exchange), .gds (GDSII stream)
+Post-Route Signoff
 
-DRC / LVS Status
+Physical Artifacts
 
-Clean (0 Violations)
+Layout Exchange Format (.def) included in repository
+
+Signoff Checks
+
+DRC / LVS Clean (0 Violations)
 
 📂 Repository Structure
 
-├── rtl/                     # SystemVerilog RTL source files
-│   ├── alu_top.sv
-│   └── booth_multiplier.sv
-├── tb/                      # Testbench files
-├── layout/                  # Generated physical design layout files (.def)
-│   └── final.def
-├── docs/                    # Layout images and architectural diagrams
-│   └── layout.png
-└── README.md
+.
+├── rtl/               # SystemVerilog source code
+├── tb/                # Testbench files for RTL simulation
+├── layout/            # Final physical design files (DEF)
+│   └── *.def          # Post-route layout file for KLayout / OpenROAD
+└── README.md          # Project documentation
 
 
-⚙️ How to Reproduce
+⚙️ How to Reproduce & View
 
-1. Functional Verification (Simulation)
+1. Inspecting the Layout
 
-Compile and run the SystemVerilog testbench using your preferred simulator (e.g., ModelSim, Questa, Verilator, or Icarus Verilog):
+To view the physical placement and routing without building the entire flow, load the provided .def file in KLayout or OpenROAD:
 
-# Example using Verilator / Icarus Verilog
+klayout layout/*.def
+
+
+2. Functional Verification
+
+Compile and simulate the SystemVerilog testbench using your preferred simulator (e.g., ModelSim, Questa, Verilator, or Icarus Verilog):
+
+# Example with Icarus Verilog
 iverilog -g2012 -o alu_tb rtl/*.sv tb/*.sv
 vvp alu_tb
 
 
-2. ASIC Physical Design Flow (OpenLane)
+3. Running OpenLane ASIC Flow
 
-To run the automated Place & Route flow in OpenLane:
+To re-run the synthesis and place & route flow:
 
-# Clone and setup OpenLane environment
 cd $OPENLANE_ROOT
-./flow.tcl -design 8bitALU_Booth
+./flow.tcl -design fsm_datapath
 
 
 📝 License
 
-This project is open-source under the MIT License.
+This project is released under the MIT License.
