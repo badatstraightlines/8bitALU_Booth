@@ -48,9 +48,13 @@ DRC / LVS Clean (0 Violations)
 
 .
 ├── rtl/               # SystemVerilog source code
+
 ├── tb/                # Testbench files for RTL simulation
+
 ├── layout/            # Final physical design files (DEF)
+
 │   └── *.def          # Post-route layout file for KLayout / OpenROAD
+
 └── README.md          # Project documentation
 
 
