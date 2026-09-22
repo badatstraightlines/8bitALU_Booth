@@ -46,7 +46,6 @@ DRC / LVS Clean (0 Violations)
 
 📂 Repository Structure
 
-.
 ├── rtl/               # SystemVerilog source code
 
 ├── tb/                # Testbench files for RTL simulation
